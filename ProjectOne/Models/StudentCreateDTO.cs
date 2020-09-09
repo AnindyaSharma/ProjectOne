@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjectOne.Models
 {
-    public class Department
+    public class StudentCreateDTO
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Department should have a name")]
+        [Required(ErrorMessage = "Student should have a name")]
         public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+
+        public int DepartmentId { get; set; }
     }
 }
