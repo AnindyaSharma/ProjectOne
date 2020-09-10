@@ -1,4 +1,5 @@
-﻿using ProjectOne.Database;
+﻿using Microsoft.Extensions.Logging;
+using ProjectOne.Database;
 using ProjectOne.Models;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace ProjectOne.Repository
     public class DepartmentRepository : IDepartmentRepository
     {
         private readonly AppDbContext dbContext;
+        private readonly ILogger<DepartmentRepository> logger;
 
-        public DepartmentRepository(AppDbContext dbContext)
+        public DepartmentRepository(AppDbContext dbContext,ILogger<DepartmentRepository>logger)
         {
             this.dbContext = dbContext;
+            this.logger = logger;
         }
         public Department Add(Department department)
         {
@@ -41,6 +44,14 @@ namespace ProjectOne.Repository
 
         public Department GetDepartment(int Id)
         {
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Critical Log");
+
+
             return dbContext.Departments.Find(Id);
         }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using ProjectOne.Models;
 using ProjectOne.Repository;
 
@@ -14,15 +15,27 @@ namespace ProjectOne.Controllers
     public class DepartmentsController : ControllerBase
     {
         private readonly IDepartmentRepository departmentRepository;
+        private readonly ILogger<DepartmentsController> logger;
 
-        public DepartmentsController(IDepartmentRepository departmentRepository)
+        public DepartmentsController(IDepartmentRepository departmentRepository,ILogger<DepartmentsController> logger)
         {
             this.departmentRepository = departmentRepository;
+            this.logger = logger;
         }
 
         [HttpGet]
         public IActionResult GetAll()
         {
+            //throw new Exception("Error in Department");
+
+            logger.LogTrace("Trace Log");
+            logger.LogDebug("Debug Log");
+            logger.LogInformation("Information Log");
+            logger.LogWarning("Warning Log");
+            logger.LogError("Error Log");
+            logger.LogCritical("Critical Log");
+
+
             var result = departmentRepository.GetAllDepartment();
             if (result == null)
             {
